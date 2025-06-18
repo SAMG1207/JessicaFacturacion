@@ -1,0 +1,28 @@
+﻿## Archivos comunes de .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+wwwroot/lib/
+## Configuración sensible
+appsettings.Development.json
+appsettings.json
+secrets.json
+
+## Archivos de log
+*.log
+
+## Rider
+.idea/
+
+## Archivos de seguridad
+*.pfx
+*.key
+*.cer
+
+## Archivos del entorno
+
+## Backup

@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Mis Pacientes";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <h2>Buscar pacientes por cliente o por DNI</h2>
+
+        <div class="col-md-6 mb-3">
+            <label for="cliente" class="form-label">Nombre del cliente:</label>
+            <select id="cliente" class="form-select">
+                <option value="">-- Seleccione el cliente --</option>
+                @foreach (var cliente in ViewBag.listaClientes)
+                {
+                    <option value="@cliente.Id">@cliente.Nombre</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label for="dniPaciente" class="form-label">DNI del paciente:</label>
+            <input type="text" id="dniPaciente" class="form-control" placeholder="Ingrese el DNI" />
+        </div>
+
+        <div class="col-12 mb-3">
+            <button id="buscar" class="btn btn-primary">Buscar</button>
+        </div>
+
+        <div class="col-12">
+            <table id="tablaPacientes" class="table table-striped d-none">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>Email</th>
+                        <th>Dirección</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los pacientes se insertarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tablaPacientes    = document.getElementById("tablaPacientes");
+    const tbodyPacientes    = tablaPacientes.querySelector("tbody");
+    const clienteInput      = document.getElementById("cliente");
+    const dniInput          = document.getElementById("dniPaciente");
+    const buscar            = document.getElementById("buscar");
+
+    const CreateTabla = (pacientes) => {
+        tablaPacientes.classList.remove("d-none");
+        tbodyPacientes.innerHTML = "";
+
+        if (!pacientes || pacientes.length === 0) {
+            const row = tbodyPacientes.insertRow();
+            const cell = row.insertCell(0);
+            cell.colSpan = 5;
+            cell.textContent = "No se encontraron pacientes.";
+            return;
+        }
+
+        pacientes.forEach(paciente => {
+            const row = tbodyPacientes.insertRow();
+            row.insertCell(0).textContent = paciente.nombre || "-";
+            row.insertCell(1).textContent = paciente.apellido || "-";
+            row.insertCell(2).textContent = paciente.dni || "-";
+            row.insertCell(3).textContent = paciente.email || "-";
+            row.insertCell(4).textContent = paciente.direccion || "-";
+        });
+    };
+
+    // Limpia el campo opuesto cuando se usa uno
+    clienteInput.addEventListener("change", () => {
+        if (clienteInput.value) dniInput.value = "";
+    });
+    dniInput.addEventListener("input", () => {
+        if (dniInput.value.trim() !== "") clienteInput.value = "";
+    });
+
+    buscar.addEventListener("click", async () => {
+        const clienteId = clienteInput.value;
+        const dni = dniInput.value.trim();
+
+        const payload = {
+            dniPaciente: dni !== "" ? dni : null,
+            clienteId: clienteId !== "" ? parseInt(clienteId) : null
+        };
+
+        if (!payload.dniPaciente && !payload.clienteId) {
+            alert("Debe ingresar un DNI o seleccionar un cliente.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/Paciente/GetPacientes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || "Error al obtener pacientes.");
+            }
+
+            const data = await response.json();
+            const pacientes = Array.isArray(data) ? data : [data];
+            CreateTabla(pacientes);
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Hubo un problema al cargar los pacientes.");
+        }
+    });
+</script>
