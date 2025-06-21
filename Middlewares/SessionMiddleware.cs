@@ -14,7 +14,7 @@
                 return;
             }
 
-            var sessionActiva = context.Session.GetString("Jessica_Luengo_Alcibar");
+            var sessionActiva = context.Session.GetString("");
             if (string.IsNullOrEmpty(sessionActiva))
             {
                 context.Response.Redirect("/Home/Login");

@@ -28,6 +28,6 @@ namespace JessicaFacturacion.Models
         public virtual Pago Pago { get; private set; } 
 
         [ForeignKey("PacienteId")]
-        public virtual Paciente Paciente { get; private set; } // 👈 Propiedad de navegación
+        public virtual Paciente Paciente { get; private set; } 
     }
 }

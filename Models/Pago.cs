@@ -9,13 +9,13 @@ namespace JessicaFacturacion.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
 
-        public int TipoServicioId { get; private set; } // 👈 Clave foránea a Servicio
+        public int TipoServicioId { get; private set; } 
 
         [Required]
         public DateTime FechaPago { get; private set; }
 
         [ForeignKey("TipoServicioId")]
-        public virtual TipoServicio TipoServicio { get; private set; } // 👈 Propiedad de navegación
+        public virtual TipoServicio TipoServicio { get; private set; }
 
     }
 }
