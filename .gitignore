@@ -11,7 +11,7 @@ wwwroot/lib/
 appsettings.Development.json
 appsettings.json
 secrets.json
-
+Middlewares/SessionMiddleware.cs
 ## Archivos de log
 *.log
 

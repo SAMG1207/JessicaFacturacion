@@ -1,10 +1,14 @@
+
+using JessicaFacturacion.Config;
 using JessicaFacturacion.Data;
 using JessicaFacturacion.Mappers;
+using JessicaFacturacion.Middlewares;
 using JessicaFacturacion.Models;
 using JessicaFacturacion.Repository.Cliente;
 using JessicaFacturacion.Repository.GenericRepository;
 using JessicaFacturacion.Repository.GenericRepository.Interface;
 using JessicaFacturacion.Repository.Jessica;
+using JessicaFacturacion.Repository.Logger;
 using JessicaFacturacion.Repository.PacienteRepository;
 using JessicaFacturacion.Repository.TipoDeFacturacionRepository;
 using JessicaFacturacion.Services.ClienteService;
@@ -15,9 +19,6 @@ using JessicaFacturacion.Utils.Passwords;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using JessicaFacturacion.Config;
-using JessicaFacturacion.Middlewares;
-using JessicaFacturacion.Repository.Logger;
 
 
 namespace JessicaFacturacion
@@ -35,6 +36,8 @@ namespace JessicaFacturacion
 
             builder.Services.AddScoped<PasswordHasher<object>>(); // Usado para el hash de contraseñas
             builder.Services.AddScoped<PasswordManager>();
+            
+        
 
             //Mappers
 
@@ -123,9 +126,9 @@ namespace JessicaFacturacion
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseMiddleware<LoggerMiddleware>();
-            app.UseSession();
-            app.UseMiddleware<SessionMiddleware>();
+            //app.UseMiddleware<LoggerMiddleware>();
+            //app.UseSession();
+            //app.UseMiddleware<SessionMiddleware>();
             app.UseAuthorization();
 
             app.MapControllerRoute(
