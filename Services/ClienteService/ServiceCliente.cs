@@ -32,9 +32,9 @@ namespace JessicaFacturacion.Services.ClienteService
      
         }
 
-        public async Task<IEnumerable<Cliente>> GetClientes()
+        public Task<IEnumerable<Cliente>> GetClientes()
         {
-            return await _clienteRepository.GetAllAsync(); 
+            return  _clienteRepository.GetAllAsync(); 
         }
     }
 }

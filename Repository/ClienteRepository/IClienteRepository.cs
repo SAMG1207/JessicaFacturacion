@@ -8,7 +8,7 @@ namespace JessicaFacturacion.Repository.Cliente
         // Aquí puedes agregar métodos específicos para el repositorio de Cliente
         // Por ejemplo:
         Task<Models.Cliente?> GetClienteByEmailAsync(string email);
-        Task<IEnumerable<Models.Cliente>> GetClientesByNombreAsync(string nombre);
+        Task<Models.Cliente?> GetClientesByNombreAsync(string nombre);
 
 
     }

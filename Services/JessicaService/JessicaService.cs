@@ -7,10 +7,10 @@ namespace JessicaFacturacion.Services.JessicaService
     {
         private readonly IJessicaRepository _jessicaRepository = jessicaRepository;
 
-        public async Task<bool> ExecuteLogin(string email, string password)
+        public Task<bool> ExecuteLogin(string email, string password)
         {
             Jessica jessica = new(email, password);
-            return await _jessicaRepository.Login(jessica);
+            return  _jessicaRepository.Login(jessica);
         }
     }
 }

@@ -3,17 +3,13 @@ using JessicaFacturacion.Repository.TipoDeFacturacionRepository;
 
 namespace JessicaFacturacion.Services.TiposDeFacturacionService
 {
-    public class TiposDeFacturacionService : ITiposDeFacturacionService
+    public class TiposDeFacturacionService(ITipoDeFacturacionRepository tipoDeFacturacionRepository) : ITiposDeFacturacionService
     {
-        private readonly ITipoDeFacturacionRepository _tipoDeFacturacionRepository;
+        private readonly ITipoDeFacturacionRepository _tipoDeFacturacionRepository = tipoDeFacturacionRepository;
 
-        public TiposDeFacturacionService(ITipoDeFacturacionRepository tipoDeFacturacionRepository)
+        public Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion()
         {
-            _tipoDeFacturacionRepository = tipoDeFacturacionRepository;
-        }
-        public async Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion()
-        {
-            return await _tipoDeFacturacionRepository.GetAllAsync();
+            return _tipoDeFacturacionRepository.GetAllAsync();
         }
     }
 

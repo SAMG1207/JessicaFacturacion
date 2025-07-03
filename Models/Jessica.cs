@@ -17,9 +17,10 @@ namespace JessicaFacturacion.Models
         [PasswordPropertyText]
         public string Password { get; set; } 
 
-
+        //NO SE PERMITE EL USO DEL CONSTRUCTOR POR DEFECTO
         private Jessica() { }
 
+        //UTILIZADA PARA EL REGISTRO DE JESSICA
         public Jessica(string email, string password, PasswordManager passwordManager)
         {
             Id = 1;
@@ -27,6 +28,7 @@ namespace JessicaFacturacion.Models
             Password = passwordManager.HashPassword(password);
         }
 
+        //UTILIZADA PARA EL INICIO DE SESION
         public Jessica (string email, string password)
         {
             Email = email;

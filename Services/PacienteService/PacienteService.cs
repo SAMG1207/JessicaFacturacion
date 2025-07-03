@@ -32,11 +32,9 @@ namespace JessicaFacturacion.Services.PacienteService
             return await _pacienteRepository.GetPacienteByDNI(dNI);
         }
 
-        public async Task<IEnumerable<Paciente?>> GetPacientesByClienteId(int clienteId)
+        public Task<IEnumerable<Paciente>> GetPacientesByClienteId(int clienteId)
         {
-            
-            return await _pacienteRepository.GetPacientesByCliente(clienteId);
+            return _pacienteRepository.GetPacientesByCliente(clienteId);
         }
-
     }
 }

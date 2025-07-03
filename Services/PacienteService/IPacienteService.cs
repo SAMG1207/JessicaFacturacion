@@ -7,7 +7,7 @@ namespace JessicaFacturacion.Services.PacienteService
     {
         Task<bool> Create(DTOCreatePaciente dTOCreatePaciente);
 
-        Task<IEnumerable<Paciente?>> GetPacientesByClienteId(int clienteId);
+        Task<IEnumerable<Paciente>> GetPacientesByClienteId(int clienteId);
 
         Task<Paciente?> GetPacienteByDNI(string  dNI);
     }

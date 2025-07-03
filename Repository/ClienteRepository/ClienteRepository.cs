@@ -2,6 +2,7 @@
 using JessicaFacturacion.Models;
 using JessicaFacturacion.Repository.GenericRepository;
 using JessicaFacturacion.Repository.GenericRepository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace JessicaFacturacion.Repository.Cliente
 {
@@ -13,14 +14,24 @@ namespace JessicaFacturacion.Repository.Cliente
             _context = context;
         }
 
-        public Task<Models.Cliente?> GetClienteByEmailAsync(string email)
+        public async Task<Models.Cliente?> GetClienteByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var cliente = await _context.Clientes
+                .Where(c => c.Email == email)
+                .FirstOrDefaultAsync();
+
+            return cliente ?? throw new Exception("No se ha encontrado un cliente con ese email");
         }
 
-        public Task<IEnumerable<Models.Cliente>> GetClientesByNombreAsync(string nombre)
+        public async Task<Models.Cliente?> GetClientesByNombreAsync(string nombre)
         {
-            throw new NotImplementedException();
+            
+            var cliente = await _context.Clientes
+                .Where(c => c.Nombre == nombre)
+                .FirstOrDefaultAsync();
+
+            return cliente ?? throw new Exception("No se ha encontrado un cliente con ese email");
         }
+
     }
 }

@@ -31,19 +31,36 @@ namespace JessicaFacturacion.Repository.GenericRepository
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var entity = await _context.Set<T>().FindAsync(id);
-            if (entity == null)
+            try
             {
+                var entity = await _context.Set<T>().FindAsync(id);
+                if (entity == null)
+                {
+                    return false;
+                }
+                _context.Remove(entity);
+                await _context.SaveChangesAsync();
+                return true;
+            }catch(Exception e)
+            {
+                Console.WriteLine($"Error al eliminar entidad: {e.Message}");
                 return false;
             }
-            _context.Remove(entity);
-            await _context.SaveChangesAsync();
-            return true;
+
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            try
+            {
+                return await _context.Set<T>().ToListAsync();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("No se han encontrado objetos");
+                return [];
+            }
+            
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -52,11 +69,20 @@ namespace JessicaFacturacion.Repository.GenericRepository
                 throw new Exception("No existe este elemento");
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public async Task<T?> UpdateAsync(T entity)
         {
-            _context.Update(entity);
-            await _context.SaveChangesAsync();
-            return entity;
+            try
+            {
+                _context.Update(entity);
+                await _context.SaveChangesAsync();
+                return entity;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error al actualizar la entidad: " + e.Message);
+                return null;
+            }
+
         }
     }
 }
