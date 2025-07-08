@@ -7,7 +7,7 @@ namespace JessicaFacturacion.Controllers
     [Route("factura")] 
     public class FacturaController : Controller
     {
-        [HttpGet("generar")]
+        [HttpGet("generarFactura/{id}")]
         public IActionResult GenerarFactura()
         {
             var factura = new
