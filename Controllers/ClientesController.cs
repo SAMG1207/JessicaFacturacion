@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using JessicaFacturacion.DTO.Cliente;
-using JessicaFacturacion.Models;
+﻿using JessicaFacturacion.DTO.Cliente;
 using JessicaFacturacion.Services.ClienteService;
 using JessicaFacturacion.Services.TiposDeFacturacionService;
 using Microsoft.AspNetCore.Mvc;
