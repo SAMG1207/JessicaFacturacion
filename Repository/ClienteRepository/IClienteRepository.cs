@@ -9,8 +9,5 @@ namespace JessicaFacturacion.Repository.Cliente
         // Por ejemplo:
         Task<Models.Cliente?> GetClienteByEmailAsync(string email);
         Task<Models.Cliente?> GetClientesByNombreAsync(string nombre);
-
-
-    }
-       
+    }     
 }

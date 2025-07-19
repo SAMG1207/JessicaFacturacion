@@ -37,14 +37,9 @@ namespace JessicaFacturacion
 
             builder.Services.AddScoped<PasswordHasher<object>>(); // Usado para el hash de contraseñas
             builder.Services.AddScoped<PasswordManager>();
-            
-        
 
             //Mappers
-
-            builder.Services.AddAutoMapper(typeof(ClienteProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(PacienteProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(CitaProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
             // Add services to the container.  
             builder.Services.AddControllersWithViews();
 

@@ -16,7 +16,19 @@ namespace JessicaFacturacion.Services.ClienteService
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task Create(DTOCreateCliente dTOCreateCliente)
+
+        public async Task ActualizaCliente(ClienteUpdateRequest request)
+        {
+            var cliente = await _unitOfWork.ClienteRepository.GetByIdAsync(request.Id);
+            if (cliente == null)
+            {
+                throw new Exceptions.Cliente.ClienteNoEncontradoException(request.Id);
+            }
+            _mapper.Map(request, cliente);
+            await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task Create(ClienteCreateRequest dTOCreateCliente)
         {
             Cliente cliente = _mapper.Map<Cliente>(dTOCreateCliente);
             await _unitOfWork.ClienteRepository.AddAsync(cliente);    

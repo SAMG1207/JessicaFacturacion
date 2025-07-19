@@ -1,6 +1,6 @@
 ﻿namespace JessicaFacturacion.DTO.Usuario
 {
-    public abstract class DTOCrearUsuarioAbstract
+    public abstract class UserCreateRequestAbstract
     {
         public string Nombre { get; set; }
 
