@@ -16,23 +16,19 @@ namespace JessicaFacturacion.Repository.PagoRepository
         }
         public async Task<Pago?> GetPagoByCitaId(int citaId)
         {
-            int? pagoId = await _context.Citas
-                .Where(c => c.Id == citaId)
-                .Select(c => c.PagoId)
-                .FirstOrDefaultAsync();
-
-            if (pagoId == null)
-            {
-                return null;
-            }
-
-            var pago = await _context.Pagos.FindAsync(pagoId);
-            return pago;
+            var cita = await _context.Citas.
+                 Include(c => c.Pago)
+                 .FirstOrDefaultAsync(c=>c.Id == citaId);
+            return cita?.Pago;
         }
 
-        public Task<IEnumerable<Pago>> GetPagosByClienteId(int clienteId)
+        public async Task<IEnumerable<Pago>> GetPagosByClienteId(int clienteId)
         {
-            throw new NotImplementedException();
+           var pagos = await _context.Pagos
+                .Where(p=>p.TipoServicio.ClienteId == clienteId)
+                .Include(p=>p.TipoServicio)
+                .ToListAsync();
+            return pagos;
         }
     }
 }

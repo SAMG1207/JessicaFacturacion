@@ -5,7 +5,7 @@ namespace JessicaFacturacion.Services.ClienteService
 {
     public interface IServiceCliente
     {
-        Task<bool> Create(DTOCreateCliente dTOCreateCliente);
+        Task Create(DTOCreateCliente dTOCreateCliente);
 
         Task<IEnumerable<Cliente>>GetClientes();
     }

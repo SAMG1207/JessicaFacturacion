@@ -15,11 +15,9 @@ namespace JessicaFacturacion.Repository.PacienteRepository
             return paciente;
         }
 
-
         public async Task<IEnumerable<Paciente>> GetPacientesByCliente(int clienteId)
         {
             return await _context.Pacientes.Where(p=>p.ClienteId== clienteId).ToListAsync();
         }
     }
-
 }

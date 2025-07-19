@@ -13,76 +13,31 @@ namespace JessicaFacturacion.Repository.GenericRepository
             _context = context;
         }
 
-        public async Task<bool> AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            try
-            {
-                await _context.AddAsync(entity);
-                await _context.SaveChangesAsync();
-                return true;
-            }catch(Exception e)
-            {
-                Console.WriteLine($"Error al agregar entidad: {e.Message}");
-                Console.WriteLine(e.StackTrace);
-                return false;
-            }
-
+            await _context.AddAsync(entity);
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public Task DeleteAsync(T entity)
         {
-            try
-            {
-                var entity = await _context.Set<T>().FindAsync(id);
-                if (entity == null)
-                {
-                    return false;
-                }
-                _context.Remove(entity);
-                await _context.SaveChangesAsync();
-                return true;
-            }catch(Exception e)
-            {
-                Console.WriteLine($"Error al eliminar entidad: {e.Message}");
-                return false;
-            }
-
+             _context.Remove(entity);
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            try
-            {
-                return await _context.Set<T>().ToListAsync();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("No se han encontrado objetos");
-                return [];
-            }
-            
+            return await _context.Set<T>().ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _context.Set<T>().FindAsync(id) ??
-                throw new Exception("No existe este elemento");
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<T?> UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            try
-            {
-                _context.Update(entity);
-                await _context.SaveChangesAsync();
-                return entity;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("Error al actualizar la entidad: " + e.Message);
-                return null;
-            }
-
+            _context.Update(entity);
         }
+
     }
 }

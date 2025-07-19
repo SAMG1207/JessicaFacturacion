@@ -4,6 +4,6 @@ namespace JessicaFacturacion.Repository.Logger
 {
     public interface ILoggerRepository
     {
-        Task<bool>AddAsync(LoggerPersonalizado logger);
+        Task AddAsync(LoggerPersonalizado logger);
     }
 }

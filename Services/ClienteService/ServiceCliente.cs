@@ -1,40 +1,30 @@
 ﻿using AutoMapper;
 using JessicaFacturacion.DTO.Cliente;
 using JessicaFacturacion.Models;
-using JessicaFacturacion.Repository.Cliente;
+using JessicaFacturacion.UnitOfWork;
 
 namespace JessicaFacturacion.Services.ClienteService
 {
     public class ServiceCliente : IServiceCliente
     {
-        private readonly IClienteRepository _clienteRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<ServiceCliente> _logger;
-        public ServiceCliente(IClienteRepository clienteRepository, IMapper mapper, ILogger<ServiceCliente> logger)
+        public ServiceCliente(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ServiceCliente> logger)
         {    
-            _clienteRepository = clienteRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<bool> Create(DTOCreateCliente dTOCreateCliente)
+        public async Task Create(DTOCreateCliente dTOCreateCliente)
         {
-            try
-            {
-                Cliente cliente = _mapper.Map<Cliente>(dTOCreateCliente);
-                var result = await _clienteRepository.AddAsync(cliente);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error creando cliente");
-                return false;
-            }
-     
+            Cliente cliente = _mapper.Map<Cliente>(dTOCreateCliente);
+            await _unitOfWork.ClienteRepository.AddAsync(cliente);    
         }
 
         public Task<IEnumerable<Cliente>> GetClientes()
         {
-            return  _clienteRepository.GetAllAsync(); 
+            return  _unitOfWork.ClienteRepository.GetAllAsync(); 
         }
     }
 }

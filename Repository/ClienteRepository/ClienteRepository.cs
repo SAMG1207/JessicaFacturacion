@@ -25,13 +25,11 @@ namespace JessicaFacturacion.Repository.Cliente
 
         public async Task<Models.Cliente?> GetClientesByNombreAsync(string nombre)
         {
-            
             var cliente = await _context.Clientes
                 .Where(c => c.Nombre == nombre)
                 .FirstOrDefaultAsync();
 
             return cliente ?? throw new Exception("No se ha encontrado un cliente con ese email");
         }
-
     }
 }

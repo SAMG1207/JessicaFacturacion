@@ -5,10 +5,10 @@
         Task<IEnumerable<T>> GetAllAsync(); //OBTENER TODOS 
         Task<T> GetByIdAsync(int id); //OBTENER POR ID
 
-        Task<bool> AddAsync(T entity); //AGREGAR
+        Task AddAsync(T entity); //AGREGAR
 
-        Task<T> UpdateAsync(T entity); //ACTUALIZAR
+        Task UpdateAsync(T entity); //ACTUALIZAR
 
-        Task<bool> DeleteAsync(int id); //ELIMINAR
+        Task DeleteAsync(T entity); //ELIMINAR
     }
 }
