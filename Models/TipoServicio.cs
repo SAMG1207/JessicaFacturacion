@@ -19,9 +19,9 @@ namespace JessicaFacturacion.Models
         public double Precio { get; private set; }
 
         [Required]
-        public int ClienteId { get; private set; } // 👈 Clave foránea a Cliente
+        public int ClienteId { get; private set; }
 
         [ForeignKey("ClienteId")]
-        public virtual Cliente Cliente { get; private set; } // 👈 Clave foránea a Cliente
+        public virtual Cliente Cliente { get; private set; }
     }
 }

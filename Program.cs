@@ -15,6 +15,7 @@ using JessicaFacturacion.Services.ClienteService;
 using JessicaFacturacion.Services.JessicaService;
 using JessicaFacturacion.Services.PacienteService;
 using JessicaFacturacion.Services.TiposDeFacturacionService;
+using JessicaFacturacion.UnitOfWork;
 using JessicaFacturacion.Utils.Passwords;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,9 @@ namespace JessicaFacturacion
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             // INYECCIONES  
+
+            // Inyección UnitOfWork
+            builder.Services.AddScoped<IUnitOfWork,JessicaFacturacion.UnitOfWork.UnitOfWork>();
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             //Inyecciones de repostiorios 

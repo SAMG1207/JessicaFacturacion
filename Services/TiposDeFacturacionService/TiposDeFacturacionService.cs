@@ -1,16 +1,16 @@
 ﻿using JessicaFacturacion.Models;
 using JessicaFacturacion.Repository.TipoDeFacturacionRepository;
+using JessicaFacturacion.UnitOfWork;
 
 namespace JessicaFacturacion.Services.TiposDeFacturacionService
 {
-    public class TiposDeFacturacionService(ITipoDeFacturacionRepository tipoDeFacturacionRepository) : ITiposDeFacturacionService
+    public class TiposDeFacturacionService(IUnitOfWork unitOfWork) : ITiposDeFacturacionService
     {
-        private readonly ITipoDeFacturacionRepository _tipoDeFacturacionRepository = tipoDeFacturacionRepository;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion()
         {
-            return _tipoDeFacturacionRepository.GetAllAsync();
+            return _unitOfWork.TipoDeFacturacionRepository.GetAllAsync();
         }
     }
-
 }

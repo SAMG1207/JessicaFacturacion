@@ -12,19 +12,9 @@ namespace JessicaFacturacion.Repository.Logger
         {
             _context = context;
         }
-        public async Task<bool> AddAsync(LoggerPersonalizado loggerP)
+        public async Task AddAsync(LoggerPersonalizado loggerP)
         {
-            try
-            {
-                await _context.logger.AddAsync(loggerP);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            
+            await _context.logger.AddAsync(loggerP);
         }
     }
 }

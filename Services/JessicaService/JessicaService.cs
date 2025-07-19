@@ -1,16 +1,16 @@
 ﻿using JessicaFacturacion.Models;
-using JessicaFacturacion.Repository.Jessica;
+using JessicaFacturacion.UnitOfWork;
 
 namespace JessicaFacturacion.Services.JessicaService
 {
-    public class JessicaService(IJessicaRepository jessicaRepository) : IJessicaService
+    public class JessicaService(IUnitOfWork unitOfWork) : IJessicaService
     {
-        private readonly IJessicaRepository _jessicaRepository = jessicaRepository;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public Task<bool> ExecuteLogin(string email, string password)
         {
             Jessica jessica = new(email, password);
-            return  _jessicaRepository.Login(jessica);
+            return _unitOfWork.JessicaRepository.Login(jessica);
         }
     }
 }

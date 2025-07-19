@@ -1,6 +1,6 @@
 ﻿namespace JessicaFacturacion.DTO.Cita
 {
-    public struct DTOCreateCita
+    public class DTOCreateCita
     {
         public int PacienteId;
         public int TipoServicioId;
@@ -9,5 +9,4 @@
         public string? Observaciones;
         public int? PagoId;
     }
-
 }
