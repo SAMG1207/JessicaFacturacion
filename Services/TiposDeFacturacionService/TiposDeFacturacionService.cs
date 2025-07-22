@@ -8,9 +8,9 @@ namespace JessicaFacturacion.Services.TiposDeFacturacionService
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-        public Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion()
+        public Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion(CancellationToken cancellationToken)
         {
-            return _unitOfWork.TipoDeFacturacionRepository.GetAllAsync();
+            return _unitOfWork.TipoDeFacturacionRepository.GetAllAsync(cancellationToken);
         }
     }
 }

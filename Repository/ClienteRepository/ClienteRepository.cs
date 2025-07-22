@@ -14,11 +14,20 @@ namespace JessicaFacturacion.Repository.Cliente
             _context = context;
         }
 
-        public async Task<Models.Cliente?> GetClienteByEmailAsync(string email)
+        public async Task<Models.Cliente> GetByDni(string dni)  
         {
             var cliente = await _context.Clientes
-                .Where(c => c.Email == email)
+                .Where(c => c.DNI == dni)
                 .FirstOrDefaultAsync();
+
+            return cliente ?? throw new Exception("No se ha encontrado un cliente con ese dni");
+        }
+
+        public async Task<Models.Cliente> GetByEmail(string email)
+        {
+            var cliente = await _context.Clientes
+            .Where(c => c.Email == email)
+            .FirstOrDefaultAsync();
 
             return cliente ?? throw new Exception("No se ha encontrado un cliente con ese email");
         }

@@ -34,7 +34,7 @@ namespace JessicaFacturacion.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> CreateCliente([FromForm] DTOCreateCliente dTOCreateCliente)
+        public async Task<IActionResult> CreateCliente([FromForm] ClienteCreateRequest dTOCreateCliente)
         {
             if(!ModelState.IsValid)
             {
@@ -44,6 +44,21 @@ namespace JessicaFacturacion.Controllers
             await _serviceCliente.Create(dTOCreateCliente);
             //return Ok();
             return RedirectToAction("Clientes");
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> UpdateCliente([FromForm] ClienteUpdateRequest request)
+        {
+            try
+            {
+                await _serviceCliente.ActualizaCliente(request);
+                return Ok();
+            }
+            catch (Exceptions.Cliente.ClienteNoEncontradoException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            
         }
     }
 }

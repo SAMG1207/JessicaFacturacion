@@ -1,11 +1,12 @@
-﻿using JessicaFacturacion.Repository.GenericRepository.Interface;
+﻿using JessicaFacturacion.Models;
+using JessicaFacturacion.Repository.GenericRepository.Interface;
+using JessicaFacturacion.Repository.UsuarioRepository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JessicaFacturacion.Repository.PacienteRepository
 {
-    public interface IPacienteRepository : IRepository<Models.Paciente>
+    public interface IPacienteRepository : IRepository<Models.Paciente>, IUsuarioRepository<Paciente>
     {
-        Task<Models.Paciente?>GetPacienteByDNI(string dni);
-
-        Task<IEnumerable<Models.Paciente>> GetPacientesByCliente(int clienteId);
+        Task<IEnumerable<Models.Paciente>> GetPacientesByCliente(int clienteId);  
     }
 }

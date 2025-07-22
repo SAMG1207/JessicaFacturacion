@@ -24,7 +24,7 @@ namespace JessicaFacturacion.Repository.GenericRepository
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken)
         {
             return await _context.Set<T>().ToListAsync();
         }
@@ -34,7 +34,7 @@ namespace JessicaFacturacion.Repository.GenericRepository
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity) // NO tiene el token de cancelacion porque quien guardará será unit of work
         {
             _context.Update(entity);
         }

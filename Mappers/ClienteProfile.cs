@@ -8,7 +8,7 @@ namespace JessicaFacturacion.Mappers
     {
         public ClienteProfile() {
 
-            CreateMap<DTOCreateCliente, Cliente>()
+            CreateMap<ClienteCreateRequest, Cliente>()
                 .ForMember(dest => dest.TipoFacturacionId, opt => opt.MapFrom(src => src.TipoDeFacturacion))
                 .ForMember(dest => dest.FechaCreacion, opt => opt.MapFrom(_ => DateTime.UtcNow));
             //los formember se usar para mapear elementos con nombres distintos, eso en el caso de 
