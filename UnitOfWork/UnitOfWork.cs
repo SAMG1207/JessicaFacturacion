@@ -37,9 +37,9 @@ namespace JessicaFacturacion.UnitOfWork
             TipoDeFacturacionRepository = tipoDeFacturacionRepository;
         }
 
-        public async Task<int> CompleteAsync()
+        public async Task<int> CompleteAsync(CancellationToken cancellationToken = default)
         {
-            return await _appDbContext.SaveChangesAsync();
+            return await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
         public void Dispose()

@@ -23,7 +23,7 @@ namespace JessicaFacturacion.Services.PacienteService
 
         public async Task<Paciente?> GetPacienteByDNI(string? dNI)
         {
-            return await _unitOfWork.PacienteRepository.GetPacienteByDNI(dNI);
+            return await _unitOfWork.PacienteRepository.GetByDni(dNI);
         }
 
         public Task<IEnumerable<Paciente>> GetPacientesByClienteId(int clienteId)

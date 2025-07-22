@@ -2,7 +2,7 @@
 {
     public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAllAsync(); //OBTENER TODOS 
+        Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken); //OBTENER TODOS 
         Task<T> GetByIdAsync(int id); //OBTENER POR ID
 
         Task AddAsync(T entity); //AGREGAR

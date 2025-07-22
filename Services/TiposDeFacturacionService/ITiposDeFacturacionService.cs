@@ -4,6 +4,6 @@ namespace JessicaFacturacion.Services.TiposDeFacturacionService
 {
     public interface ITiposDeFacturacionService
     {
-        Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion();
+        Task<IEnumerable<TipoFacturacion>> GetTiposFacturacion(CancellationToken cancellationToken);
     }
 }

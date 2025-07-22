@@ -2,7 +2,7 @@
 
 namespace JessicaFacturacion.DTO.Cliente
 {
-    public class DTOCreateCliente : DTOCrearUsuarioAbstract
+    public class ClienteCreateRequest : UserCreateRequestAbstract
     {
         public int TipoDeFacturacion { get; set; }
     }

@@ -2,16 +2,23 @@
 using JessicaFacturacion.Models;
 using JessicaFacturacion.Repository.GenericRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace JessicaFacturacion.Repository.PacienteRepository
 {
-    public class PacienteRepository(AppDbContext context) : Repository<Paciente>(context), IPacienteRepository
+    public class PacienteRepository(AppDbContext context) :  Repository<Paciente>(context), IPacienteRepository
     {
         private readonly AppDbContext _context = context;
 
-        public async Task<Paciente?> GetPacienteByDNI(string dni)
+        public async Task<Paciente> GetByDni(string dni)
         {
-            var paciente = await _context.Pacientes.FirstOrDefaultAsync(p=>p.DNI == dni);
+            var paciente = await _context.Pacientes.FirstOrDefaultAsync(p => p.DNI == dni);
+            return paciente;
+        }
+
+        public async Task<Paciente> GetByEmail(string email)
+        {
+            var paciente = await _context.Pacientes.FirstOrDefaultAsync(p => p.Email == email);
             return paciente;
         }
 

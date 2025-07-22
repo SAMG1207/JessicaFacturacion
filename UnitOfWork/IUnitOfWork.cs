@@ -16,6 +16,6 @@ namespace JessicaFacturacion.UnitOfWork
         IPagoRepository PagoRepository { get; }
 
         ITipoDeFacturacionRepository TipoDeFacturacionRepository { get; }
-        Task<int> CompleteAsync();
+        Task<int> CompleteAsync(CancellationToken cancellationToken = default);
     }
 }
