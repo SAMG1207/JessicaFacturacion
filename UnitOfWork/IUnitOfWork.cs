@@ -1,4 +1,5 @@
-﻿using JessicaFacturacion.Repository.Cliente;
+﻿using JessicaFacturacion.Repository.CitaRepository;
+using JessicaFacturacion.Repository.Cliente;
 using JessicaFacturacion.Repository.FacturaRepository;
 using JessicaFacturacion.Repository.Jessica;
 using JessicaFacturacion.Repository.Logger;
@@ -15,6 +16,7 @@ namespace JessicaFacturacion.UnitOfWork
         ILoggerRepository LoggerRepository { get; }
         IPagoRepository PagoRepository { get; }
 
+        ICitaRepository CitaRepository { get; } 
         ITipoDeFacturacionRepository TipoDeFacturacionRepository { get; }
         Task<int> CompleteAsync(CancellationToken cancellationToken = default);
     }

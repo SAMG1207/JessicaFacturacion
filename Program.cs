@@ -4,6 +4,7 @@ using JessicaFacturacion.Data;
 using JessicaFacturacion.Mappers;
 using JessicaFacturacion.Middlewares;
 using JessicaFacturacion.Models;
+using JessicaFacturacion.Repository.CitaRepository;
 using JessicaFacturacion.Repository.Cliente;
 using JessicaFacturacion.Repository.FacturaRepository;
 using JessicaFacturacion.Repository.GenericRepository;
@@ -13,6 +14,7 @@ using JessicaFacturacion.Repository.Logger;
 using JessicaFacturacion.Repository.PacienteRepository;
 using JessicaFacturacion.Repository.PagoRepository;
 using JessicaFacturacion.Repository.TipoDeFacturacionRepository;
+using JessicaFacturacion.Services.CitasService;
 using JessicaFacturacion.Services.ClienteService;
 using JessicaFacturacion.Services.JessicaService;
 using JessicaFacturacion.Services.PacienteService;
@@ -59,13 +61,16 @@ namespace JessicaFacturacion
             //Logger
 
             builder.Services.AddScoped<ILoggerRepository, LoggerRepository>();
-            //Jessica
-            builder.Services.AddScoped<IJessicaRepository, JessicaRepository>();
-              builder.Services.AddScoped<IJessicaService, JessicaService>();
+                //CITAS
+                builder.Services.AddScoped<ICitaRepository, CitaRepository>();
+                builder.Services.AddScoped<ICitaService, CitaService>();
+                //Jessica
+                builder.Services.AddScoped<IJessicaRepository, JessicaRepository>();
+                builder.Services.AddScoped<IJessicaService, JessicaService>();
                 //CLIENTE
                
                 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-                builder.Services.AddScoped<IServiceCliente, ServiceCliente>();
+                builder.Services.AddScoped<IServiceCliente, ClienteService>();
                 
                 // Tipos de facturacion
                 builder.Services.AddScoped<ITipoDeFacturacionRepository, TipoDeFacturacionRepository>();

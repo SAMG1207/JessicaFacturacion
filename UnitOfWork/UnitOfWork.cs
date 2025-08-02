@@ -1,4 +1,5 @@
 ﻿using JessicaFacturacion.Data;
+using JessicaFacturacion.Repository.CitaRepository;
 using JessicaFacturacion.Repository.Cliente;
 using JessicaFacturacion.Repository.FacturaRepository;
 using JessicaFacturacion.Repository.Jessica;
@@ -19,6 +20,8 @@ namespace JessicaFacturacion.UnitOfWork
         public IPagoRepository PagoRepository { get; }
         public ITipoDeFacturacionRepository TipoDeFacturacionRepository { get; }
 
+        public ICitaRepository CitaRepository { get; }
+
         public UnitOfWork(
             AppDbContext appDbContext,
             IPacienteRepository pacienteRepository,
@@ -26,6 +29,7 @@ namespace JessicaFacturacion.UnitOfWork
             IJessicaRepository jessicaRepository,
             ILoggerRepository loggerRepository,
             IPagoRepository pagoRepository,
+            ICitaRepository citaRepository,
             ITipoDeFacturacionRepository tipoDeFacturacionRepository)
         {
             _appDbContext = appDbContext;
@@ -34,6 +38,7 @@ namespace JessicaFacturacion.UnitOfWork
             JessicaRepository = jessicaRepository;
             LoggerRepository = loggerRepository;
             PagoRepository = pagoRepository;
+            CitaRepository = citaRepository;
             TipoDeFacturacionRepository = tipoDeFacturacionRepository;
         }
 

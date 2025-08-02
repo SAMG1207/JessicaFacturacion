@@ -5,12 +5,12 @@ using JessicaFacturacion.UnitOfWork;
 
 namespace JessicaFacturacion.Services.ClienteService
 {
-    public class ServiceCliente : IServiceCliente
+    public class ClienteService : IServiceCliente
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<ServiceCliente> _logger;
-        public ServiceCliente(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ServiceCliente> logger)
+        private readonly ILogger<ClienteService> _logger;
+        public ClienteService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ClienteService> logger)
         {    
             _unitOfWork = unitOfWork;
             _mapper = mapper;

@@ -1,5 +1,4 @@
-﻿using JessicaFacturacion.Models;
-using JessicaFacturacion.Repository.GenericRepository.Interface;
+﻿using JessicaFacturacion.Repository.GenericRepository.Interface;
 using JessicaFacturacion.Repository.UsuarioRepository;
 
 namespace JessicaFacturacion.Repository.Cliente

@@ -8,7 +8,7 @@ namespace JessicaFacturacion.Mappers
     {
         public CitaProfile() {
 
-            CreateMap<DTOCreateCita, Cita>();
+            CreateMap<CreateCitaRequest, Cita>();
         }
     }
 }

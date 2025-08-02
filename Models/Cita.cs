@@ -19,7 +19,9 @@ namespace JessicaFacturacion.Models
 
         public string? Observaciones { get; private set; }
 
-        public int? PagoId { get; private set; } 
+        public int? PagoId { get; private set; }
+
+        public bool IsCancelled { get; private set; } = false;
 
         [ForeignKey("TipoServicioId")]
         public virtual TipoServicio TipoServicio { get; private set; } 
@@ -29,5 +31,10 @@ namespace JessicaFacturacion.Models
 
         [ForeignKey("PacienteId")]
         public virtual Paciente Paciente { get; private set; } 
+
+        public void CancelCita()
+        {
+            IsCancelled = true;
+        }
     }
 }
