@@ -15,12 +15,12 @@ namespace JessicaFacturacion.Controllers
         private readonly ILogger<ClientesController> _logger = logger;
         private readonly IServiceCliente _serviceCliente = serviceCliente;
         private readonly ITiposDeFacturacionService _tiposDeFacturacionService = tiposDeFacturacionService;
-        
+        private CancellationToken cancellationToken;
 
         [HttpGet]
         public async Task<IActionResult> Clientes()
         {
-            var tipos = await _tiposDeFacturacionService.GetTiposFacturacion();
+            var tipos = await _tiposDeFacturacionService.GetTiposFacturacion(cancellationToken);
             ViewBag.TiposDeFacturacion = tipos;
             return View();
         }
@@ -28,7 +28,7 @@ namespace JessicaFacturacion.Controllers
         [HttpGet]
         public async Task<IActionResult> MisClientes()
         {
-            var clientes = await _serviceCliente.GetClientes();
+            var clientes = await _serviceCliente.GetClientes(cancellationToken);
             return View(clientes);
         }
 
@@ -41,7 +41,7 @@ namespace JessicaFacturacion.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _serviceCliente.Create(dTOCreateCliente);
+            await _serviceCliente.Create(dTOCreateCliente, cancellationToken);
             //return Ok();
             return RedirectToAction("Clientes");
         }
@@ -51,7 +51,7 @@ namespace JessicaFacturacion.Controllers
         {
             try
             {
-                await _serviceCliente.ActualizaCliente(request);
+                await _serviceCliente.ActualizaCliente(request, cancellationToken);
                 return Ok();
             }
             catch (Exceptions.Cliente.ClienteNoEncontradoException ex)

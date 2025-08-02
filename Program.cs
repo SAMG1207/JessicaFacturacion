@@ -5,11 +5,13 @@ using JessicaFacturacion.Mappers;
 using JessicaFacturacion.Middlewares;
 using JessicaFacturacion.Models;
 using JessicaFacturacion.Repository.Cliente;
+using JessicaFacturacion.Repository.FacturaRepository;
 using JessicaFacturacion.Repository.GenericRepository;
 using JessicaFacturacion.Repository.GenericRepository.Interface;
 using JessicaFacturacion.Repository.Jessica;
 using JessicaFacturacion.Repository.Logger;
 using JessicaFacturacion.Repository.PacienteRepository;
+using JessicaFacturacion.Repository.PagoRepository;
 using JessicaFacturacion.Repository.TipoDeFacturacionRepository;
 using JessicaFacturacion.Services.ClienteService;
 using JessicaFacturacion.Services.JessicaService;
@@ -72,6 +74,10 @@ namespace JessicaFacturacion
                 //Pacientes
                 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
                 builder.Services.AddScoped<IPacienteService, PacienteService>();
+
+                //Pago
+                builder.Services.AddScoped<IPagoRepository, PagoRepository>();
+            
 
             // Configurar sesiones
             builder.Services.AddSession(options =>
