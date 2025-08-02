@@ -9,10 +9,10 @@ namespace JessicaFacturacion.Controllers
 {
     public class PacienteController : Controller
     {
-        ILogger<PacienteController> _logger;
-        IPacienteService _pacienteService;
-        IServiceCliente _serviceCliente;
-
+        private readonly ILogger<PacienteController> _logger;
+        private readonly IPacienteService _pacienteService;
+        private readonly IServiceCliente _serviceCliente;
+        private readonly CancellationToken cancellationToken;
         public PacienteController(ILogger<PacienteController> logger, IPacienteService pacienteService, IServiceCliente serviceCliente)
         {
             _logger = logger;
@@ -23,14 +23,14 @@ namespace JessicaFacturacion.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var clientes = await _serviceCliente.GetClientes();
+            var clientes = await _serviceCliente.GetClientes(cancellationToken);
             ViewBag.listaClientes = clientes;
             return View();
         }
 
         public async Task<IActionResult> MisPacientes()
         {
-            var clientes = await _serviceCliente.GetClientes();
+            var clientes = await _serviceCliente.GetClientes(cancellationToken);
             ViewBag.listaClientes = clientes;
             return View();
         }
